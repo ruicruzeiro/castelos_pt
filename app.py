@@ -1,5 +1,6 @@
 import folium as fl
 import streamlit as st
+from streamlit_folium import st_folium
 from castelos_dict import castelos_info
 
 st.set_page_config(
@@ -8,6 +9,15 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto",
     menu_items=None)
+
+st.markdown("""
+        ## CASTELOS PORTUGUESES
+        """)
+
+st.markdown('<p class="small-font">Informação obtida no excelente site \
+    <a href="https://www.castelosdeportugal.pt/">Castelos de Portugal</a></p>',\
+    unsafe_allow_html=True)
+
 
 name_list = []
 coord_list = []
@@ -39,4 +49,4 @@ for coord, name, popup in zip(coord_list, name_list, popup_list):
 
 feature_group.add_to(map)
 
-st.write(map._repr_html_(), unsafe_allow_html=True)
+st_data = st_folium(map, width=725)
